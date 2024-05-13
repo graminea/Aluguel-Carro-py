@@ -65,22 +65,28 @@ class Login_e_Operacoes:
         if self.usuario_logado is None:
             print('Você precisa estar logado para adicionar saldo.')
             return
+        while True:
+            valor = float(input('Qual valor deseja adicionar?: '))
+            if 0 < valor < 12000:
+                countdown(2)
+                print()
+                print('Escolha a forma de pagamento:')
+                print('1. Cartão de crédito')
+                print('2. PIX')
 
-        valor = float(input('Qual valor deseja adicionar?: '))
-        countdown(2)
-        print()
-        print('Escolha a forma de pagamento:')
-        print('1. Cartão de crédito')
-        print('2. PIX')
+                opcao_pagamento = int(input('Digite o número da forma de pagamento desejada: '))
 
-        opcao_pagamento = int(input('Digite o número da forma de pagamento desejada: '))
-
-        if opcao_pagamento == 1:
-            self.adcsaldo_cartao(valor)
-        elif opcao_pagamento == 2:
-            self.adcsaldo_pix(valor)
-        else:
-            print('Opção inválida.')
+                if opcao_pagamento == 1:
+                    self.adcsaldo_cartao(valor)
+                elif opcao_pagamento == 2:
+                    self.adcsaldo_pix(valor)
+                else:
+                    print('Opção inválida.')
+                break
+            else:
+                print('Valor maximo de um depósito é de R$12000, e o mínimo de R$150')
+                print('Tente novamente com valores nessa faixa de preço!!')
+                countdown(2)
 
     def adcsaldo_cartao(self, valor):
         print()
